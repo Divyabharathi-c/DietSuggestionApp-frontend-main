@@ -1,0 +1,43 @@
+.imgweightloss{
+    background-image: url('../assets/weightloss.jpg');
+    background-size:100% 100%;
+    background-position: center;
+}
+
+.imgweightgain{
+    background-image: url('../assets/weightgain.jpg');
+    background-size: 100% 100%;
+    background-position: center;
+}
+
+.weightloss{
+    margin-top: 40%;
+    margin-left: 25%;
+    margin-right: 25%;
+    border-radius: 30px;
+    background: rgba(227, 221, 210, 0.73);
+    padding: 50px;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    font-size: 30px;
+    
+}
+
+.weightgain{
+    margin-top: 40%;
+    margin-left: 25%;
+    margin-right: 25%;
+    border-radius: 30px;
+    background: rgba(227, 221, 210, 0.73);
+    padding: 50px;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    font-size: 30px;
+    
+}

@@ -23,7 +23,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const loginResponse = await fetch("https://dietbackend.onrender.com/auth/login", {
+    const loginResponse = await fetch("https://dietbackend.onrender.com/api/auth/login", {
       method: "POST",
       body: JSON.stringify({ email, password }),
       headers: {
@@ -31,16 +31,19 @@ function Login() {
       },
     });
 
-    const data = await loginResponse.json();
+    // const data = await loginResponse.json();
     if (loginResponse.status === 405) {
       alert("Not Activated your account");
     } else if (loginResponse.status === 401 || loginResponse.status === 404) {
       alert("Login failed");
-    } else {
+    } else if (loginResponse.ok) {
+      const data = await loginResponse.json();
       alert("Login Success");
       localStorage.setItem("user", JSON.stringify(data));
       window.location.reload();
       handleReset();
+    } else {
+      alert("An unexpected error occurred during login.");
     }
   };
 
@@ -61,7 +64,7 @@ function Login() {
             {/* Left column container with background */}
             <div className="mb-12 md:mb-0 md:w-8/12 lg:w-6/12">
               <img
-                src="https://tecdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTak5whWNd0cn_D-mL75N1-NlPmkycoS0HMPgrKcbaK-jhnuIyyNevOvAOtmZgiEc6zOmE&usqp=CAU"
                 className="w-full"
                 alt="Phone image"
               />
@@ -159,6 +162,44 @@ function Login() {
                   {/* Register */}
                   Register
                 </Link>
+
+                <button
+type="button"
+className="btn btn-outline-info text-center"
+data-bs-toggle="modal"
+data-bs-target="#exampleModal"
+>
+Demo Credentials
+</button>
+<div
+class="modal fade"
+id="exampleModal"
+tabindex="-1"
+aria-labelledby="exampleModalLabel"
+aria-hidden="true"
+>
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<h1 class="modal-title fs-5" id="exampleModalLabel">
+<h2> Demo Login Data</h2>
+</h1>
+<button
+type="button"
+class="btn-close"
+data-bs-dismiss="modal"
+aria-label="Close"
+></button>
+</div>
+<div class="modal-body"><h6>Email: divyabharathi.csit@gmail.com</h6><br/>
+<h6>Password: 12345</h6>
+</div>
+
+
+</div>
+</div>
+</div>
+
               </form>
             </div>
           </div>

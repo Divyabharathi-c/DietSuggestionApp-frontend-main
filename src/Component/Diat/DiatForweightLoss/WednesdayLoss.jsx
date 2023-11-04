@@ -6,18 +6,15 @@ const WednesdayLoss = () => {
 
   const fetchUser = async () => {
     try {
-      const responce = await fetch(`${backendUrl}/weightloss`);
-      const data = await responce.json();
-      const data1 = data[2];
-      const data2 = data1.Wednesday;
-      const data3 = data2.Breakfast;
-      console.log(data3);
-      setUsers(data2);
+      const response = await fetch('https://dietbackend.onrender.com/api/weightloss');
+      const data = await response.json();
+      if (data) {
+        setUsers(data);
+      }
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
-
   useEffect(() => {
     fetchUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -32,92 +29,19 @@ const WednesdayLoss = () => {
         Wednesday
       </h2>
 
-      <div className="p-4 bg-gray-100">
-        <div className="bg-white p-4 shadow-md rounded-md">
-          <h3 className="text-xl font-semibold">Breakfast</h3>
-          {users && users.Breakfast ? (
-            <>
-              <p>Food: {users.Breakfast.Food}</p>
-              <p>Calories: {users.Breakfast.Calories}</p>
-              <p>Protein: {users.Breakfast.Protein}</p>
-              <p>Carbs: {users.Breakfast.Carbs}</p>
-              <p>Fat: {users.Breakfast.Fat}</p>
-            </>
-          ) : (
-            <p>No Breakfast data available.</p>
-          )}
+      {users.map((user, index) => (
+        <div key={index} className="p-4 bg-gray-100">
+          <div className="bg-white p-4 shadow-md rounded-md" style={{ textAlign: "center" }}>
+            <h3 className="text-xl font-semibold">{user.mealTime}</h3>
+            <p>Food: {user.food}</p>
+            <p>Calories: {user.calories}</p>
+            <p>Protein: {user.protein}</p>
+            <p>Carbs: {user.carbs}</p>
+            <p>Fat: {user.fat}</p>
+          </div>
         </div>
-      </div>
-
-      <div className="p-4 bg-gray-100">
-        <div className="bg-white p-4 shadow-md rounded-md">
-          <h3 className="text-xl font-semibold">Snack</h3>
-          {users && users.Snack ? (
-            <>
-              <p>Food: {users.Snack.Food}</p>
-              <p>Calories: {users.Snack.Calories}</p>
-              <p>Protein: {users.Snack.Protein}</p>
-              <p>Carbs: {users.Snack.Carbs}</p>
-              <p>Fat: {users.Snack.Fat}</p>
-            </>
-          ) : (
-            <p>No Snack data available.</p>
-          )}
-        </div>
-      </div>
-
-      <div className="p-4 bg-gray-100">
-        <div className="bg-white p-4 shadow-md rounded-md">
-          <h3 className="text-xl font-semibold">Lunch</h3>
-          {users && users.Lunch ? (
-            <>
-              <p>Food: {users.Lunch.Food}</p>
-              <p>Calories: {users.Lunch.Calories}</p>
-              <p>Protein: {users.Lunch.Protein}</p>
-              <p>Carbs: {users.Lunch.Carbs}</p>
-              <p>Fat: {users.Lunch.Fat}</p>
-            </>
-          ) : (
-            <p>No Lunch data available.</p>
-          )}
-        </div>
-      </div>
-
-      <div className="p-4 bg-gray-100">
-        <div className="bg-white p-4 shadow-md rounded-md">
-          <h3 className="text-xl font-semibold">Snack2</h3>
-          {users && users.Snack2 ? (
-            <>
-              <p>Food: {users.Snack2.Food}</p>
-              <p>Calories: {users.Snack2.Calories}</p>
-              <p>Protein: {users.Snack2.Protein}</p>
-              <p>Carbs: {users.Snack2.Carbs}</p>
-              <p>Fat: {users.Snack2.Fat}</p>
-            </>
-          ) : (
-            <p>No Snack data available.</p>
-          )}
-        </div>
-      </div>
-
-      <div className="p-4 bg-gray-100">
-        <div className="bg-white p-4 shadow-md rounded-md">
-          <h3 className="text-xl font-semibold">Dinner</h3>
-          {users && users.Dinner ? (
-            <>
-              <p>Food: {users.Dinner.Food}</p>
-              <p>Calories: {users.Dinner.Calories}</p>
-              <p>Protein: {users.Dinner.Protein}</p>
-              <p>Carbs: {users.Dinner.Carbs}</p>
-              <p>Fat: {users.Dinner.Fat}</p>
-            </>
-          ) : (
-            <p>No Dinner data available.</p>
-          )}
-        </div>
-      </div>
+      ))}
     </>
   );
 };
-
 export default WednesdayLoss;

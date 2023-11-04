@@ -7,7 +7,7 @@ const Registercheck = () => {
   const [params] = useSearchParams();
   const navigate = useNavigate();
   const verifyUser = async () => {
-    const Response = await fetch("https://dietbackend.onrender.com/auth/validate", {
+    const Response = await fetch("https://dietbackend.onrender.com/api/auth/validate", {
       method: "PUT",
       body: JSON.stringify({
         resetKey: params.get("reset"),

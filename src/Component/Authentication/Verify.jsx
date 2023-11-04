@@ -1,31 +1,56 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
-// import { backendUrl } from "../../config";
+import { backendUrl } from "../../config";
 import styles from "./Verify.module.css";
 
 const Verify = () => {
   const [params] = useSearchParams();
   const navigate = useNavigate();
-  const verifyUser = async () => {
-    const Response = await fetch('https://dietbackend.onrender.com/auth/validate', {
+
+  const verifyUser = async () => { 
+  //   try {
+  //     const Response = await fetch('https://dietbackend.onrender.com/auth/validate', {
+  //     method: "PUT",
+  //     body: JSON.stringify({ resetKey: params.get("reset") }),
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   });
+  //   const data = await Response.json();
+  //   console.log(data === true);
+  //   if (data === true) {
+  //     alert("Login Success");
+  //     navigate("/paswordreset");
+  //   } else {
+  //     alert("Login failed");
+  //   }
+  // };
+
+
+
+  try {
+    const response = await fetch("https://dietbackend.onrender.com/api/auth/validate", {
       method: "PUT",
-      body: JSON.stringify({ resetKey: params.get("reset") }),
+      body: JSON.stringify({ resetkey: params.get("reset") }),
       headers: {
         "Content-Type": "application/json",
       },
     });
-    const data = await Response.json();
-    console.log(data === true);
-    if (data === true) {
+
+    if (response.ok) {
       alert("Login Success");
-      navigate("/paswordreset");
+      navigate("/login");
     } else {
       alert("Login failed");
     }
-  };
+  } catch (error) {
+    console.log("Error during email verifivation:", error);
+    alert("An error occurred during email verification.");
+  }
+};
+
   useEffect(() => {
     verifyUser();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

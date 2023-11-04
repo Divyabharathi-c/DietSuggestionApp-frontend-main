@@ -30,14 +30,14 @@ function Register() {
   const handleReset = () => {
     setEmail("");
     setPassword("");
-    setFirstname("");
-    setLastname("");
+     setFirstname("");
+     setLastname("");
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const registerResponse = await fetch(`http://localhost:5000/api/auth/register`, {
+    const registerResponse = await fetch("https://dietbackend.onrender.com/api/auth/register", {
       method: "POST",
       body: JSON.stringify({ Firstname, Lastname, email, password }),
       headers: {
@@ -57,7 +57,7 @@ function Register() {
   };
 
   const handleEmailCheck = async () => {
-    const loginResponse = await fetch(`${backendUrl}/auth/regmail`, {
+    const loginResponse = await fetch("https://dietbackend.onrender.com/api/auth/regmail", {
       method: "POST",
       body: JSON.stringify({ email }),
       headers: {

@@ -204,7 +204,7 @@ aria-label="Close"
             </div>
           </div>
         </div>
-      </section>
+        </section>
     </div>
   );
 }
